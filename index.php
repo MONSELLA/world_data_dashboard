@@ -310,7 +310,7 @@ $result5 = $conn->query($sql5);
 
 <footer class="bg-dark text-center text-white py-3">
     <div class="d-flex justify-content-center align-items-center">
-        <a href="https://github.com/maarcnavarro9/World-Data-Dashboard" target="_blank" class="text-white me-3">
+        <a href="https://github.com/MONSELLA/world_data_dashboard" target="_blank" class="text-white me-3">
             <img src="images/github.svg" alt="GitHub" width="30" height="30" class="d-inline-block">
         </a>
         <a href="https://www.linkedin.com/in/pau-monserrat-llabr%C3%A9s-73382929a/" target="_blank" class="text-white me-3">
