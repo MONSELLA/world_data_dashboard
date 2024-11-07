@@ -48,7 +48,7 @@ $result5 = $conn->query($sql5);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>World Data Dashboard</title>
-    <link rel="icon" href="world.png" type="image/png">
+    <link rel="icon" href="images/world.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -58,7 +58,7 @@ $result5 = $conn->query($sql5);
     <nav class="bg-dark navbar navbar-expand-lg">
         <div class="container-fluid">
             <a href="https://www.uib.cat" class="navbar-brand" style="color: #fff;">
-                <img src="UIB.svg" alt="Logo" width="50" height="50" class="d-inline-block align-text-top">
+                <img src="images/UIB.svg" alt="Logo" width="50" height="50" class="d-inline-block align-text-top">
             </a>
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -311,13 +311,13 @@ $result5 = $conn->query($sql5);
 <footer class="bg-dark text-center text-white py-3">
     <div class="d-flex justify-content-center align-items-center">
         <a href="https://github.com/maarcnavarro9/World-Data-Dashboard" target="_blank" class="text-white me-3">
-            <img src="github.svg" alt="GitHub" width="30" height="30" class="d-inline-block">
+            <img src="images/github.svg" alt="GitHub" width="30" height="30" class="d-inline-block">
         </a>
         <a href="https://www.linkedin.com/in/pau-monserrat-llabr%C3%A9s-73382929a/" target="_blank" class="text-white me-3">
-            <img src="linkedin.png" alt="LinkedIn Pau" width="30" height="30" class="d-inline-block">
+            <img src="images/linkedin.png" alt="LinkedIn Pau" width="30" height="30" class="d-inline-block">
         </a>
         <a href="https://www.linkedin.com/in/marc-navarro-amengual" target="_blank" class="text-white">
-            <img src="linkedin.png" alt="LinkedIn Marc" width="30" height="30" class="d-inline-block">
+            <img src="images/linkedin.png" alt="LinkedIn Marc" width="30" height="30" class="d-inline-block">
         </a>
     </div>
     <p class="mt-3 mb-0">&copy; <span id="current-year"></span> Pau Monserrat & Marc Navarro</p>
