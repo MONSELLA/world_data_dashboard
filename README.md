@@ -3,9 +3,13 @@
 
  ![Vista Previa](/images/2.JPG)
 
+<p align="center">
+
 ![Static Badge](https://img.shields.io/badge/bootstrap-5.3.3-blue)
 ![Static Badge](https://img.shields.io/badge/xampp-3.3.0-pink)
 ![Static Badge](https://img.shields.io/badge/php-8.2.12-yellow)
+
+</p>
 
 ## Tabla de Contenidos
 1. [Descripción del Proyecto](#descripción-del-proyecto)
