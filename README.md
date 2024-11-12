@@ -1,8 +1,7 @@
 
 # Proyecto: World Data Dashboard
 
- | ![Vista Previa](/images/2.JPG) |
- |:------------------------------:|
+ ![Vista Previa](/images/2.JPG)
 
 ![Bootstrap Badge](https://img.shields.io/badge/bootstrap-5.3.3-blue) ![XAMPP Badge](https://img.shields.io/badge/xampp-3.3.0-pink) ![PHP Badge](https://img.shields.io/badge/php-8.2.12-yellow)
 
@@ -46,8 +45,7 @@ Crear un panel de control interactivo que permita visualizar datos mediante grá
 2. Importa la base de datos World en PHPMyAdmin desde el enlace proporcionado en la sección de requisitos previos, asegurándote de que los datos necesarios están disponibles.
 3. Configura el acceso a la base de datos en el archivo conexion.php del proyecto, donde debes especificar las credenciales de conexión (nombre de usuario, contraseña, y nombre de la base de datos).
 4. Inicia Apache y MySQL desde el panel de control de XAMPP.
-| ![Vista Previa](/images/1.JPG) |
-|:------------------------------:|
+ ![Vista Previa](/images/1.JPG)
 5. Accede al archivo index.php desde tu navegador usando la URL raíz de tu servidor local para verificar que el proyecto se está ejecutando correctamente.
 
 ## Uso del Proyecto
