@@ -56,7 +56,7 @@ Crear un panel de control interactivo que permita visualizar datos mediante grá
 ## Créditos
 Desarrollado por [Pau Monserrat Llabrés](https://github.com/MONSELLA) y [Marc Navarro Amengual](https://github.com/maarcnavarro9)
 
-## License
+## Licencia
 >Puedes consultar la licencia completa [aquí](https://github.com/MONSELLA/world_data_dashboard/blob/main/LICENSE.txt)
 
 Este proyecto está licenciado bajo los términos de la licencia **MIT**.
