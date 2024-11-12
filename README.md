@@ -3,6 +3,10 @@
 
  ![Vista Previa](/images/2.JPG)
 
+![Static Badge](https://img.shields.io/badge/https%3A%2F%2Fimg.shields.io%2Fbadge%2Fbootstrap-5.3.3-blue)
+![Static Badge](https://img.shields.io/badge/https%3A%2F%2Fimg.shields.io%2Fbadge%xampp-3.3.0-pink)
+![Static Badge](https://img.shields.io/badge/https%3A%2F%2Fimg.shields.io%2Fbadge%php-8.2.12-yellow)
+
 ## Tabla de Contenidos
 1. [Descripción del Proyecto](#descripción-del-proyecto)
 2. [Objetivo](#objetivo)
@@ -20,7 +24,7 @@ Este proyecto consiste en el desarrollo de un panel de datos (Data Dashboard) qu
 Crear un panel de control interactivo que permita visualizar datos mediante gráficos y otras herramientas visuales.
 
 ### Tecnologías Utilizadas
-- **Bootstrap 5.3** - Utilizado para el diseño y la estructura del front-end, garantizando una interfaz moderna y responsiva para el dashboard.
+- **Bootstrap** - Utilizado para el diseño y la estructura del front-end, garantizando una interfaz moderna y responsiva para el dashboard.
 - **JavaScript y jQuery** - Empleados para la manipulación del DOM y añadir interactividad en el dashboard.
 - **Highcharts** - Biblioteca utilizada para crear gráficos interactivos que visualizan los datos de manera intuitiva y dinámica.
 - **PHP** - Utilizado en el back-end para manejar las consultas a la base de datos y generar el contenido dinámico del dashboard.
