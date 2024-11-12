@@ -3,10 +3,9 @@
 
  ![Vista Previa](/images/2.JPG)
 
-![Static Badge](https://img.shields.io/badge/https%3A%2F%2Fimg.shields.io%2Fbadge%2Fbootstrap-5.3.3-blue)
-![Static Badge](https://img.shields.io/badge/:bootstrap-5.3.3-blue)
-![Static Badge](https://img.shields.io/badge/:xampp-3.3.0-pink)
-![Static Badge](https://img.shields.io/badge/:php-8.2.12-yellow)
+![Static Badge](https://img.shields.io/badge/bootstrap-5.3.3-blue)
+![Static Badge](https://img.shields.io/badge/xampp-3.3.0-pink)
+![Static Badge](https://img.shields.io/badge/php-8.2.12-yellow)
 
 ## Tabla de Contenidos
 1. [Descripción del Proyecto](#descripción-del-proyecto)
