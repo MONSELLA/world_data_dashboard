@@ -23,7 +23,7 @@ Crear un panel de control interactivo que permita visualizar datos mediante grá
 
 ### Tecnologías Utilizadas
 - **Bootstrap** - Utilizado para el diseño y la estructura del front-end, garantizando una interfaz moderna y responsiva para el dashboard.
-- **JavaScript y jQuery** - Empleados para la manipulación del DOM y añadir interactividad en el dashboard.
+- **JavaScript** - Empleados para la manipulación del DOM y añadir interactividad en el dashboard.
 - **Highcharts** - Biblioteca utilizada para crear gráficos interactivos que visualizan los datos de manera intuitiva y dinámica.
 - **PHP** - Utilizado en el back-end para manejar las consultas a la base de datos y generar el contenido dinámico del dashboard.
 - **XAMPP** - Plataforma que incluye Apache, PHP y MySQL, usada para configurar el servidor local y administrar la base de datos del proyecto.
