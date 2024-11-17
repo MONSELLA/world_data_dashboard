@@ -23,15 +23,16 @@ Crear un panel de control interactivo que permita visualizar datos mediante grá
 
 ### Tecnologías Utilizadas
 - **Bootstrap** - Utilizado para el diseño y la estructura del front-end, garantizando una interfaz moderna y responsiva para el dashboard.
-- **JavaScript** - Empleados para la manipulación del DOM y añadir interactividad en el dashboard.
+- **JavaScript y Jquery** - Empleados para la manipulación del DOM y añadir interactividad en el dashboard.
 - **Highcharts** - Biblioteca utilizada para crear gráficos interactivos que visualizan los datos de manera intuitiva y dinámica.
-- **PHP** - Utilizado en el back-end para manejar las consultas a la base de datos y generar el contenido dinámico del dashboard.
+- **Fetch API** - para obtener datos de manera asíncrona desde el servidor
+Apache (XAMPP) y actualizar el contenido de la web con la información recibida de la base de datos en tiempo real, sin recargar la página.
+- **PHP** - Utilizado en el back-end para manejar las consultas a la base de datos.
 - **XAMPP** - Plataforma que incluye Apache, PHP y MySQL, usada para configurar el servidor local y administrar la base de datos del proyecto.
 - **PHPMyAdmin** - Herramienta para la gestión y consulta de la base de datos MySQL, facilitando la creación y administración de tablas y datos necesarios para el dashboard.
 
 ## Requisitos Previos
 - **XAMPP** - Debes tener instalado XAMPP para configurar el entorno del servidor Apache y la base de datos MySQL localmente.
-- **PHPMyAdmin** - Necesario para gestionar la base de datos, realizar consultas y ajustar los datos utilizados por el dashboard.
 - **PHP** - Se recomienda la versión 7.4 o superior para compatibilidad con el código.
 - **Base de Datos `World`** - Debes importar la base de datos [World](world.sql) en PHPMyAdmin, ya que contiene los datos de países, ciudades y lenguajes necesarios para las visualizaciones del dashboard.
 

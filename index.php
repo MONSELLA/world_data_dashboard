@@ -1,44 +1,5 @@
 <?php
 include("conexion.php");
-
-// Definir la consulta SQL
-$sql1 = "SELECT Name, Population 
-        FROM country
-        ORDER BY Population DESC
-        LIMIT 5";
-
-$sql2 = "SELECT Name, Population 
-        FROM city
-        ORDER BY Population DESC
-        LIMIT 5";
-
-$sql3 = "SELECT Name,SurfaceArea 
-        FROM country
-        ORDER BY SurfaceArea DESC
-        LIMIT 5";
-
-$sql4 = "SELECT Language, COUNT(Name) AS name_count
-        FROM (
-            SELECT Language, Name 
-            FROM country 
-            JOIN countrylanguage ON Code = CountryCode
-        ) AS subquery
-        GROUP BY Language
-        ORDER BY name_count DESC
-        LIMIT 5";
-
-$sql5 = "SELECT Name, Population 
-        FROM City
-        WHERE CountryCode='ESP'
-        ORDER BY Population DESC
-        LIMIT 5";
-
-// Ejecutar la consulta
-$result1 = $conn->query($sql1);
-$result2 = $conn->query($sql2);
-$result3 = $conn->query($sql3);
-$result4 = $conn->query($sql4);
-$result5 = $conn->query($sql5);
 ?>
 
 <!DOCTYPE html>
@@ -51,6 +12,7 @@ $result5 = $conn->query($sql5);
     <link rel="icon" href="images/world.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -75,7 +37,8 @@ $result5 = $conn->query($sql5);
     <div class="mt-4 mb-4 text-center">
         <h1>World Data Dashboard</h1>
     </div>
-
+    <!-- Espacio entre filas -->
+    <div class="my-5"></div>
     <div class="container text-center">
         <div class="row">
             <div class="col">
@@ -85,6 +48,8 @@ $result5 = $conn->query($sql5);
                 <div id="container2" style="width:100%; height:400px;"></div>
             </div>
         </div>
+        <!-- Espacio entre filas -->
+        <div class="my-5"></div>
         <div class="row">
             <div class="col">
                 <div id="container3" style="width:100%; height:400px;"></div>
@@ -99,204 +64,248 @@ $result5 = $conn->query($sql5);
     </div>
 
     <script>
-        function createChart1(containerId) {
-            let countryNames = [];
-            let population = [];
-
-            <?php
-            while ($row = $result1->fetch_assoc()) {
-                echo "countryNames.push('" . addslashes($row["Name"]) . "');\n";
-                echo "population.push(" . $row["Population"] . ");\n";
-            }
-            ?>
-
-            Highcharts.chart(containerId, {
-                chart: {
-                    type: 'column'
-                },
-                title: {
-                    text: 'Countries with Higher Population'
-                },
-                xAxis: {
-                    categories: countryNames
-                },
-                yAxis: {
-                    title: {
-                        text: 'Population'
+        function fetchData(queryType, callback) {
+            fetch(`fetch_data.php?query=${queryType}`)
+                .then(response => {
+                    console.log(`Response for ${queryType}:`, response);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(`Data received for ${queryType}:`, data);
+                    if (!data || !Array.isArray(data) || data.length === 0) {
+                        console.error(`No valid data received for ${queryType}.`);
+                        return;
                     }
-                },
-                series: [{
-                    name: 'Population',
-                    data: population
-                }]
-            });
+                    callback(data);
+                })
+                .catch(error => console.error('Error fetching data:', error));
         }
 
-        function createChart2(containerId) {
-            let cityNames = [];
-            let population = [];
 
-            <?php
-            while ($row = $result2->fetch_assoc()) {
-                echo "cityNames.push('" . addslashes($row["Name"]) . "');\n";
-                echo "population.push(" . $row["Population"] . ");\n";
-            }
-            ?>
+        function createOrUpdateChart1(chart) {
+            fetchData('topCountriesByPopulation', function(data) {
+                let countryNames = data.map(item => item.Name);
+                let population = data.map(item => parseInt(item.Population, 10));
 
-            Highcharts.chart(containerId, {
-                chart: {
-                    type: 'column'
-                },
-                title: {
-                    text: 'Cities with Higher Population'
-                },
-                xAxis: {
-                    categories: cityNames
-                },
-                yAxis: {
-                    title: {
-                        text: 'Population'
-                    }
-                },
-                series: [{
-                    name: 'Population',
-                    data: population,
-                    color: '#2ecc71'
-                }]
-            });
-        }
-
-        function createChart3(containerId) {
-            let countryNames = [];
-            let surfaceArea = [];
-
-            <?php
-            while ($row = $result3->fetch_assoc()) {
-                echo "countryNames.push('" . addslashes($row["Name"]) . "');\n";
-                echo "surfaceArea.push(" . $row["SurfaceArea"] . ");\n";
-            }
-            ?>
-
-            Highcharts.chart(containerId, {
-                chart: {
-                    type: 'pie'
-                },
-                title: {
-                    text: 'Countries with Higher Surface Area'
-                },
-                plotOptions: {
-                    pie: {
-                        allowPointSelect: true,
-                        cursor: 'pointer',
-                        dataLabels: {
-                            enabled: true,
-                            format: '{point.name}'
+                if (!chart) {
+                    // Crear el gráfico por primera vez
+                    chart = Highcharts.chart('container1', {
+                        chart: {
+                            type: 'column'
                         },
-                        showInLegend: true
-                    }
-                },
-                series: [{
-                    name: 'Surface Area',
-                    colorByPoint: true,
-                    data: [{
-                            name: countryNames[0],
-                            y: surfaceArea[0]
+                        title: {
+                            text: 'Countries with Higher Population'
                         },
-                        {
-                            name: countryNames[1],
-                            y: surfaceArea[1]
+                        xAxis: {
+                            categories: countryNames
                         },
-                        {
-                            name: countryNames[2],
-                            y: surfaceArea[2]
+                        yAxis: {
+                            title: {
+                                text: 'Population'
+                            }
                         },
-                        {
-                            name: countryNames[3],
-                            y: surfaceArea[3]
-                        },
-                        {
-                            name: countryNames[4],
-                            y: surfaceArea[4]
+                        series: [{
+                            name: 'Population',
+                            data: population
+                        }],
+                        credits: {
+                            enabled: false // Eliminar la marca de agua de Highcharts
                         }
-                    ]
-                }]
+                    });
+                } else {
+                    // Actualizar los datos
+                    chart.xAxis[0].setCategories(countryNames);
+                    chart.series[0].setData(population);
+                }
             });
+            return chart;
         }
 
-        function createChart4(containerId) {
-            let languages = [];
-            let totalCountries = [];
 
-            <?php
-            while ($row = $result4->fetch_assoc()) {
-                echo "languages.push('" . addslashes($row["Language"]) . "');\n";
-                echo "totalCountries.push(" . $row["name_count"] . ");\n";
+        function createOrUpdateChart2(chart) {
+            fetchData('topCitiesByPopulation', function(data) {
+                let cityNames = data.map(item => item.Name);
+                let population = data.map(item => parseInt(item.Population, 10));
+
+                if (!chart) {
+                    chart = Highcharts.chart('container4', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Cities with Higher Population'
+                        },
+                        xAxis: {
+                            categories: cityNames
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Population'
+                            }
+                        },
+                        series: [{
+                            name: 'Population',
+                            data: population,
+                            color: '#2ecc71'
+                        }],
+                        credits: {
+                            enabled: false // Eliminar la marca de agua de Highcharts
+                        }
+                    });
+                } else {
+                    chart.xAxis[0].setCategories(cityNames);
+                    chart.series[0].setData(population);
+                }
+            });
+            return chart;
+        }
+
+
+        function createOrUpdateChart3(chart) {
+            fetchData('topCountriesBySurfaceArea', function(data) {
+                let countryNames = data.map(item => item.Name);
+                let surfaceAreas = data.map(item => parseFloat(item.SurfaceArea));
+
+                if (!chart) {
+                    chart = Highcharts.chart('container2', {
+                        chart: {
+                            type: 'pie'
+                        },
+                        title: {
+                            text: 'Countries with Higher Surface Area'
+                        },
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                dataLabels: {
+                                    enabled: true,
+                                    format: '{point.name}'
+                                },
+                                showInLegend: true
+                            }
+                        },
+                        series: [{
+                            name: 'Surface Area',
+                            colorByPoint: true,
+                            data: countryNames.map((name, i) => ({
+                                name,
+                                y: surfaceAreas[i]
+                            }))
+                        }],
+                        credits: {
+                            enabled: false // Eliminar la marca de agua de Highcharts
+                        }
+                    });
+                } else {
+                    chart.series[0].setData(countryNames.map((name, i) => ({
+                        name,
+                        y: surfaceAreas[i]
+                    })));
+                }
+            });
+            return chart;
+        }
+
+
+        function createOrUpdateChart4(chart) {
+            fetchData('languagesByCountryCount', function(data) {
+                let languages = data.map(item => item.Language);
+                let totalCountries = data.map(item => parseInt(item.name_count, 10));
+
+                if (!chart) {
+                    // Crear el gráfico por primera vez
+                    chart = Highcharts.chart('container3', {
+                        chart: {
+                            type: 'bar'
+                        },
+                        title: {
+                            text: 'Languages spoken in more countries'
+                        },
+                        xAxis: {
+                            categories: languages
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Countries'
+                            }
+                        },
+                        series: [{
+                            name: 'Countries',
+                            data: totalCountries,
+                            color: '#a569bd'
+                        }],
+                        credits: {
+                            enabled: false // Eliminar la marca de agua de Highcharts
+                        }
+                    });
+                } else {
+                    // Actualizar los datos del gráfico existente
+                    chart.xAxis[0].setCategories(languages);
+                    chart.series[0].setData(totalCountries);
+                }
+            });
+            return chart;
+        }
+
+
+        function createOrUpdateChart5(chart) {
+            fetchData('topCitiesInSpain', function(data) {
+                let cityNames = data.map(item => item.Name);
+                let population = data.map(item => parseInt(item.Population, 10));
+
+                if (!chart) {
+                    // Crear el gráfico por primera vez
+                    chart = Highcharts.chart('container5', {
+                        chart: {
+                            type: 'bar'
+                        },
+                        title: {
+                            text: 'Most populated cities in Spain'
+                        },
+                        xAxis: {
+                            categories: cityNames
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Population'
+                            }
+                        },
+                        series: [{
+                            name: 'Population',
+                            data: population,
+                            color: '#cc922e'
+                        }],
+                        credits: {
+                            enabled: false // Eliminar la marca de agua de Highcharts
+                        }
+                    });
+                } else {
+                    // Actualizar los datos del gráfico existente
+                    chart.xAxis[0].setCategories(cityNames);
+                    chart.series[0].setData(population);
+                }
+            });
+            return chart;
+        }
+
+
+        $(document).ready(function() {
+            let chart1, chart2, chart3, chart4, chart5;
+
+            function updateCharts() {
+                chart1 = createOrUpdateChart1(chart1);
+                chart2 = createOrUpdateChart2(chart2);
+                chart3 = createOrUpdateChart3(chart3);
+                chart4 = createOrUpdateChart4(chart4);
+                chart5 = createOrUpdateChart5(chart5);
             }
-            ?>
 
-            Highcharts.chart(containerId, {
-                chart: {
-                    type: 'bar'
-                },
-                title: {
-                    text: 'Languages spoken in more countries'
-                },
-                xAxis: {
-                    categories: languages
-                },
-                yAxis: {
-                    title: {
-                        text: 'Countries'
-                    }
-                },
-                series: [{
-                    name: 'Countries',
-                    data: totalCountries,
-                    color: '#a569bd'
-                }]
-            });
-        }
+            // Crear los gráficos inicialmente
+            updateCharts();
 
-        function createChart5(containerId) {
-            let cityName = [];
-            let population = [];
-
-            <?php
-            while ($row = $result5->fetch_assoc()) {
-                echo "cityName.push('" . addslashes($row["Name"]) . "');\n";
-                echo "population.push(" . $row["Population"] . ");\n";
-            }
-            ?>
-
-            Highcharts.chart(containerId, {
-                chart: {
-                    type: 'bar'
-                },
-                title: {
-                    text: 'Most populated cities in Spain'
-                },
-                xAxis: {
-                    categories: cityName
-                },
-                yAxis: {
-                    title: {
-                        text: 'Population'
-                    }
-                },
-                series: [{
-                    name: 'Population',
-                    data: population,
-                    color: '#cc922e'
-                }]
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            createChart1('container1');
-            createChart2('container4');
-            createChart3('container2');
-            createChart4('container3');
-            createChart5('container5');
+            // Actualizar los gráficos cada 30 segundos
+            setInterval(updateCharts, 30000);
         });
     </script>
 
@@ -325,7 +334,7 @@ $result5 = $conn->query($sql5);
 
 <script>
     // Script para actualizar el año automáticamente
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+    $('#current-year').text(new Date().getFullYear());
 </script>
 
 </html>
