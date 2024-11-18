@@ -30,6 +30,7 @@ Apache (XAMPP) y actualizar el contenido de la web con la información recibida 
 - **PHP** - Utilizado en el back-end para manejar las consultas a la base de datos.
 - **XAMPP** - Plataforma que incluye Apache, PHP y MySQL, usada para configurar el servidor local y administrar la base de datos del proyecto.
 - **PHPMyAdmin** - Herramienta para la gestión y consulta de la base de datos MySQL, facilitando la creación y administración de tablas y datos necesarios para el dashboard.
+- **API de OpenWeatherMap**: Integrada para obtener información meteorológica en tiempo real, incluyendo temperatura, íconos y descripciones del clima, lo que añade un componente dinámico y contextual al dashboard.
 
 ## Requisitos Previos
 - **XAMPP** - Debes tener instalado XAMPP para configurar el entorno del servidor Apache y la base de datos MySQL localmente.

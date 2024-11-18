@@ -30,7 +30,12 @@ include("conexion.php");
                 <li class="nav-item">
                     <a class="nav-link" href="https://dev.mysql.com/doc/index-other.html" style="color: #fff;">Data Source</a>
                 </li>
-
+            </ul>
+            <!-- Espacio para el tiempo -->
+            <div class="weather-info text-white d-flex align-items-center ms-auto me-3">
+                <img id="weather-icon" src="" alt="Weather Icon" width="40" height="40" class="me-2">
+                <span id="weather-temp"></span>
+            </div>
         </div>
     </nav>
 
@@ -62,6 +67,37 @@ include("conexion.php");
             </div>
         </div>
     </div>
+
+    <script>
+        // Obtener el tiempo de Palma de Mallorca desde OpenWeatherMap
+        const apiKey = "bd5e378503939ddaee76f12ad7a97608";
+        const city = "Palma de Mallorca";
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+
+        function updateWeather() {
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.weather && data.main) {
+                        const iconCode = data.weather[0].icon;
+                        const temp = Math.round(data.main.temp); // Redondear la temperatura
+
+                        // Actualizar el DOM con la información del tiempo
+                        $("#weather-icon").attr("src", `https://openweathermap.org/img/wn/${iconCode}.png`);
+                        $("#weather-temp").text(`${temp}°C`);
+
+                    } else {
+                        console.error("Error fetching weather data:", data);
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+        }
+
+        // Llamar a la función al cargar la página
+        updateWeather();
+        // Actualizar el tiempo cada 10 minutos
+        setInterval(updateWeather, 600000);
+    </script>
 
     <script>
         function fetchData(queryType, callback) {
