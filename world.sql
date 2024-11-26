@@ -21,6 +21,9 @@ SET time_zone = "+00:00";
 -- Base de datos: `world`
 --
 
+CREATE DATABASE world;
+USE world;
+
 -- --------------------------------------------------------
 
 --
@@ -59,7 +62,7 @@ INSERT INTO `city` (`ID`, `Name`, `CountryCode`, `District`, `Population`) VALUE
 (17, 'Almere', 'NLD', 'Flevoland', 142465),
 (18, 'Arnhem', 'NLD', 'Gelderland', 138020),
 (19, 'Zaanstad', 'NLD', 'Noord-Holland', 135621),
-(20, '´s-Hertogenbosch', 'NLD', 'Noord-Brabant', 129170),
+(20, 'Hertogenbosch', 'NLD', 'Noord-Brabant', 129170),
 (21, 'Amersfoort', 'NLD', 'Utrecht', 126270),
 (22, 'Maastricht', 'NLD', 'Limburg', 122087),
 (23, 'Dordrecht', 'NLD', 'Zuid-Holland', 119811),
